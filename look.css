@@ -1,0 +1,10 @@
+.quote{
+    float: right;
+    background-color: red;
+    color:white;
+}
+
+figure > img{
+    border: 15px solid red;
+    border-radius: 25px;
+}

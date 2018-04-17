@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Folklorist's Look | Culture Cast Upon a Wall </title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Latest compiled and minified CSS from Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library, just in case -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript, just in case -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--our shared css-->
+    <link href="styles.css" rel=stylesheet type="text/css" >
+    
+    <!-- this page's specific css-->
+    <link href="look.css" rel=stylesheet type="text/css" >
+
+    <!--font-->
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Permanent+Marker|Quattrocento+Sans" rel="stylesheet">
+
+</head>
+
+<body>
+    <header id="grad1">
+        <a href="index.html" id="home">
+            <h1>Culture Cast Upon a Wall</h1>
+        </a>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbuttons">
+                <button class="btn navbar-btn" id="look"><a href="look.html">Lore Look</a></button>
+                <button class="btn navbar-btn" id="murals"><a href="mm.html">Murals</a></button>
+                <button class="btn navbar-btn" id="graffiti"><a href="gg.html">Graffiti</a></button>
+                <button class="btn navbar-btn" id="campus"><a href="campus.html">Campus</a></button>
+                <button class="btn navbar-btn" id="sources"><a href="cited.html">Sources</a></button>
+                <canvas id="c" onclick="off()"></canvas>
+                <button class="btn navbar-btn" #id="thing" onclick="on()">A Thing</button>
+                
+                <script>
+                    /* from W3Schools*/
+                    function on() {
+                        document.getElementById("c").style.display = "block";
+                    }
+
+                    function off() {
+                        document.getElementById("c").style.display = "none";
+                    }
+                    
+                    /*from Tim Holman on CodePen*/
+                    var width = window.innerWidth,
+                    height = window.innerHeight,
+                    c = document.getElementById('c'),
+                    ctx = c.getContext('2d');
+                    c.width = width;
+                    c.height = height;
+
+                    var paint = [];
+
+                    var totalPaints = width/50;
+                    var size = 20;
+
+                    function init(){
+                        for (var i = 0; i < totalPaints; i++){
+                            addPaint();
+                        }
+                        setInterval( update, 40 );
+                    }
+
+                    function drawPaint(x,y,size, colour) {
+                        ctx.beginPath();
+                        ctx.arc(x, y, size ,0 , Math.PI*2, true);
+                        ctx.closePath();
+                        ctx.fillStyle=colour;
+                        ctx.fill();
+                    }
+
+                    function update(){
+                        for (var i = 0; i < paint.length; i++){
+                            paint[i].y = paint[i].y + paint[i].v;
+                            if (paint[i].y > height + 60){
+                                paint.splice(i,1);
+                                addPaint();
+                            }
+                            drawPaint(paint[i].x, paint[i].y, paint[i].s, paint[i].c);
+                        }
+                    }
+
+                    function addPaint(){
+                        //Try 50 times
+                        var i = 50;
+                        while(i > 0){
+                            size = Math.random() * size + 10;
+                            x = Math.random() * width;
+
+                            found = false;
+
+                            //Dont Allow drips ontop of each other (Overtaking drops destroy the prettyness)
+                            for (var j = 0; j < paint.length; j++){
+                                if ((x + size > paint[j].x) && (x - size < paint[j].x + paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+
+                                if ((x - size < paint[j].x) && (x + size > paint[j].x - paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (found == false){
+                                paint.push({s:size,
+                                           x:x,
+                                           y:-60,
+                                           v:(Math.random() * 2) + 2,
+                                           c:'#' + (Math.random() * 0x313131 + 0xaaaaaa | 0).toString(16)});
+                                i--;
+                                return;
+                            }
+                        }
+                    }
+
+                    init();
+                </script>
+            </div>
+        </div>
+    </nav>
+    <div class="synopsis">
+        <p>
+            “Beauty is as beauty does.” – a quote from <b>Cultivating Arts and Social Change</b> by folklorist Debora Kodish
+        </p>
+    </div>
+
+    <div class="container">
+        <div id="info">
+            <p>
+               In <i>The Future of Folklore Studies in America: The Urban Frontier</i>, folklorist Barbara Kirshenblatt-Gimblett, aka BKG, there is a quote that not only perfectly expresses the general purpose and drive of folklore and its studies but also gives reason for the existence and spread of wall art like graffiti and murals: “[The] New World has preserved what the Old World has forgotten.” 
+            </p>
+            <p class="quote">
+                “The New World has preserved what the Old World has forgotten.” 
+            </p>
+            <p>
+                Just as the ancient cavepeople, early humans, and Neanderthals made paintings on caves, hieroglyphics and character sets were created and composed into culture, and the ancient authors and alphas of theatre turned oral traditions into literal, literary writings, artists of the present find their muse and weave it into the walls that corral them. By doing so, they make an intimate, personal concern that may have dissipated into the general chaos of society into a public statement to be observed, absorbed, and perhaps challenged. It is hard to escape an issue when it is constantly looking you in the face. For graffiti, a singular word or phrase may be branded into a barricade of sorts by spray paint, eventually burning itself into your eyes. For murals, an actual face may be staring at you, discerning you with as much judgment as the amount you would give it in order to understand its messaging. 
+            </p>
+            <figure>
+                <img src="fantasy.jpg" alt="A fantastical mural" title="“The mural had a mythical iconography, an image of a paradise in trouble, yet saved.” – Cary Cordova" />
+                <figcaption>
+                    Mujeres Muralistas (Graciela Carrillo, Irene Pérez, and Patricia Rodriguez) – “Fantasy World for Children”, 24th Street Mini-Park, SF, CA, 20x40 ft. 
+                </figcaption>
+            </figure>
+            <p>
+               Cary Cordova, in his article <i>Portable Murals: Children’s Book Press and the Circulation of Latino Art</i>, tells the tale of Harriet Rohmer and her familiars in the southwestern United States attempting and succeeding in creating a book press in 1975 that focused on making a book for English-Spanish bilingual children. With most stories in this country focusing on a predominately White, usually Christian, post-Colonial perspective, many children had no easy way to connect with them. So, with the integration of their (other) native languages and cultures from home, children could finally feel included in literature, seeing themselves in a story. While the words that are written are important and should be considered, what drew me to Cordova’s piece was his comparison of traditional illustrations to murals. In fact, muralists were contacted and used as inspiration for the illustrations to be used in books.  
+            </p>
+            <p>
+                Cordova specifies that the imagery and Ms. Rohmer “sought to challenge hegemonic narratives and iconographies.” One muralist, Patricia Rodriguez of the Mujeres Muralistas (Women Muralists), a group of artistic lady-friends based in California, details that “when you do a mural, it isn’t just for the artists, it’s for the community, it’s a voice.” Similarly, in <i>Understanding Graffiti</i>, an assemblage of multidisciplinary studies and articles grouped together by Troy Lovata and Elizabeth Olton, graffiti is designated as “a phenomenon driven by the need to express a proscribed opinion, thought, or experience, allowing the benefit of anonymity to protect the writer from retribution." 
+            </p>
+            <p>
+                Where some creatives adapt to more physical expression, using their bodies as instruments through music and song or using their bodies as machines through dance or three-dimensional artworks, there is a special place (aside from the obvious wall) for two-dimensional portals into the past and present for the future. If someone wants to send a message to a particular audience, then they will do their best to do so, exposing their vision to the world. No matter the way one does it – mural, graffiti, or something in between – their presence will dig their importance into you, no matter how superficially, more than a fleeting obituary or breaking news article in a dying, daily newspaper would for a moment to be lost in the next cycle. Although, after some time, each new creation may cover the one that lived in its place directly before, there is always a new historical tale being told once again.
+            </p>
+            <p class="quote">
+                “The cave painting is now collective.” – Norman Mailer
+            </p>
+        </div>
+    </div>
+    <footer>
+        <div id="projdetails">
+            <p>
+                Johna Dalton | Culture Cast Upon a Wall
+                <br >FOLK 476: Urban Folklore: Graffiti, Gods, and Gardens | Dr. Gabrielle Berlinger
+                <br ><a href="http://www.unc.edu/" target="_blank">The University of North Carolina at Chapel Hill</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Murals and Mastery | Culture Cast Upon a Wall </title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Latest compiled and minified CSS from Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library, just in case -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript, just in case -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--our shared css-->
+    <link href="styles.css" rel=stylesheet type="text/css" >
+    
+    <!-- this page's specific css-->
+    <link href="mm.css" rel=stylesheet type="text/css" >
+
+    <!--font-->
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Permanent+Marker|Quattrocento+Sans" rel="stylesheet">
+
+</head>
+
+<body>
+    <header id="grad1">
+        <a href="index.html" id="home">
+            <h1>Culture Cast Upon a Wall</h1>
+        </a>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbuttons">
+                <button class="btn navbar-btn" id="look"><a href="look.html">Lore Look</a></button>
+                <button class="btn navbar-btn" id="murals"><a href="mm.html">Murals</a></button>
+                <button class="btn navbar-btn" id="graffiti"><a href="gg.html">Graffiti</a></button>
+                <button class="btn navbar-btn" id="campus"><a href="campus.html">Campus</a></button>
+                <button class="btn navbar-btn" id="sources"><a href="cited.html">Sources</a></button>
+                <canvas id="c" onclick="off()"></canvas>
+                <button class="btn navbar-btn" #id="thing" onclick="on()">A Thing</button>
+                
+                <script>
+                    /* from W3Schools*/
+                    function on() {
+                        document.getElementById("c").style.display = "block";
+                    }
+
+                    function off() {
+                        document.getElementById("c").style.display = "none";
+                    }
+                    
+                    /*from Tim Holman on CodePen*/
+                    var width = window.innerWidth,
+                    height = window.innerHeight,
+                    c = document.getElementById('c'),
+                    ctx = c.getContext('2d');
+                    c.width = width;
+                    c.height = height;
+
+                    var paint = [];
+
+                    var totalPaints = width/50;
+                    var size = 20;
+
+                    function init(){
+                        for (var i = 0; i < totalPaints; i++){
+                            addPaint();
+                        }
+                        setInterval( update, 40 );
+                    }
+
+                    function drawPaint(x,y,size, colour) {
+                        ctx.beginPath();
+                        ctx.arc(x, y, size ,0 , Math.PI*2, true);
+                        ctx.closePath();
+                        ctx.fillStyle=colour;
+                        ctx.fill();
+                    }
+
+                    function update(){
+                        for (var i = 0; i < paint.length; i++){
+                            paint[i].y = paint[i].y + paint[i].v;
+                            if (paint[i].y > height + 60){
+                                paint.splice(i,1);
+                                addPaint();
+                            }
+                            drawPaint(paint[i].x, paint[i].y, paint[i].s, paint[i].c);
+                        }
+                    }
+
+                    function addPaint(){
+                        //Try 50 times
+                        var i = 50;
+                        while(i > 0){
+                            size = Math.random() * size + 10;
+                            x = Math.random() * width;
+
+                            found = false;
+
+                            //Dont Allow drips ontop of each other (Overtaking drops destroy the prettyness)
+                            for (var j = 0; j < paint.length; j++){
+                                if ((x + size > paint[j].x) && (x - size < paint[j].x + paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+
+                                if ((x - size < paint[j].x) && (x + size > paint[j].x - paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (found == false){
+                                paint.push({s:size,
+                                           x:x,
+                                           y:-60,
+                                           v:(Math.random() * 2) + 2,
+                                           c:'#' + (Math.random() * 0x313131 + 0xaaaaaa | 0).toString(16)});
+                                i--;
+                                return;
+                            }
+                        }
+                    }
+
+                    init();
+                </script>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="synopsis">
+        <p>
+            "Look at the walls… the energy is still there - energy to create, energy to be seen, energy to be heard." - Lady Pink
+        </p>
+    </div>
+
+    <div class="container">
+        <div id="info">
+            <p>
+                Why does someone make a painting? The above quote by Lady Pink gives an idea: an energy and/or message (as described on other pages) to be made, seen, and heard. With the only boundaries of a mural being the dimensions of the wall itself and the requests or principles generalized by the environment where the wall stands, the possibilities of visual and symbolic expression are endless. 
+            </p>
+            <p>
+                Lady Pink is a memorial artist – one of many artists that create works to honor someone’s passing – presented in <i>R.I.P. Memorial Wall Art</i>, a photo collection by Martha Cooper and famed folklorist Joseph Sciorra. The Cooper and Sciorra assortment contains more than one hundred examples that were displayed all over New York City, particularly Brooklyn and the Bronx, I believe, in the early 1990s, each one acknowledging the various aspects of a person that the artist or the person that commissioned the artist really cared about. However, with many of them, if the reasons for death could have been preventable, especially in this day and age, such as a disease or violence along the streets, then there the celebration of the deceased soul is joined by a hope for peace and/or an acknowledgement of the sad truths of society.
+            </p>
+            <p>
+                New York City is a mecca for murals, let alone being an icon or image of the overall United States, with its multiple boroughs filled with an enormous flooding of diversity. However, it falters in comparison to Philadelphia. Coined both “the city of brotherly love” and “the city of murals”, there are over three thousand sizeable spans of art gracing nearly every precipice. The large smorgasbord of works is most likely due to the initiation of the Mural Arts Program in the 1980s. 
+            </p>
+            <div class="quote">
+                <p>
+                    How murals in the Mural Arts Program are made, according to Maureen H. O’Connell
+                </p>
+                <hr />
+                <ol>
+                    <li>Each mural starts in the neighborhood itself. First, there are meetings to discuss ideas for a given mural and to gather the needed signatures for an application to M.A.P. </li>
+                    <li>Once an application is accepted, there begins a long process that links a particular wall with neighborhood residents and an artist. </li>
+                    <li>The muralist is subsidized by MAP, but the ideas for the mural originate with people in the neighborhood, who frequently assist in the painting's execution. </li>
+                    <li>Once the mural is finished, there is a community dedication ceremony and MAP turns over general upkeep to the neighborhood. </li>
+                    <li>As a result, people in the neighborhood have a permanent investment in the mural's preservation and maintenance. </li>
+                </ol>
+            </div>
+            <p>
+                As described by Kristin Lee Moss in her article <i>Cultural Representation in Philadelphia Murals: Images of Resistance and Sites of Identity Negotiation</i>, the program, aka the MAP, was started by Jane Golden who was hired by the then-mayor Wilson Goode. It was formed as a function of local government, particularly to deter taggers – graffiti artists that paste their names and/or pseudonyms in places – from defacing works. Of course, ruining something one had no influence in creating or had no large-scale bother by it is malicious, usually being against the law. However, there can be an argument for the program’s instigation based on the city’s approximate half-and-half division between Whites and Blacks, even though the mayor himself was, if I remember correctly, a Black man, part of the American minority himself.
+            </p>
+            <figure>
+                <img src="common-threads.jpg" alt="a mural of various African-American women" title="Jane Golden - the mural “Unites allegory and portraiture in a broad commentary about the things that connect us across generations and across cultures.”" />
+                <figcaption>
+                    "Common Threads", Meg Saligman - European conventions for atypical representations of people of color; the young women are the most salient.
+                </figcaption>
+            </figure>
+            <p>
+                Moss’ words and perhaps my own opinions can be supported by the words of Maureen H. O’Connell. Her article, <i>Painting Hope</i>, details how Philly is registered as a city with one of highest numbers of homicides in the nation. (Isn’t that why the Fresh Prince himself was pushed to move to Bel-Air?) The sociopolitical dynamics of today probably have not evolved much from the time of the article, as it is approximately only a decade or so old, now, and with the general intertwining of African-American society, gang behavior, and gun violence being advertised and stigmatized in and out of media, along with the typical alienation of Black women in most fields that aren’t domestic or needing the use of higher education – well, that is how I, a Black woman in STEM that wanted to make, of all things, a website see it – the high concentration of murals recognizing Black excellence, Black love, the importance of religion, et cetera to combat the harsh stereotyping makes sense. (Note: I’m not saying there is no sensible basis for these perspectives. I’m just saying it is unfortunate for there to be a supportable basis.)
+            </p>
+            <p>
+                While their pieces – many blended with the styles of graffiti to be detailed elsewhere on this site – may contain some of the loveliest portraitures I have ever seen, there is a dichotomy between what is plastered and stretched along a wall to be seen, not necessarily done, for free and what hangs, most times in a frame, in a gallery to be enamored and glorified for viewing by and purchase through more money than is surely necessary (that is, unless you’re evading taxes). 
+            </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/QZz2PhTQJCA" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <footer>
+        <div id="projdetails">
+            <p>
+                Johna Dalton | Culture Cast Upon a Wall
+                <br >FOLK 476: Urban Folklore: Graffiti, Gods, and Gardens | Dr. Gabrielle Berlinger
+                <br ><a href="http://www.unc.edu/" target="_blank">The University of North Carolina at Chapel Hill</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

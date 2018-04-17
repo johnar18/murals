@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Greats and Graffiti | Culture Cast Upon a Wall </title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Latest compiled and minified CSS from Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library, just in case -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript, just in case -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--our shared css-->
+    <link href="styles.css" rel=stylesheet type="text/css" >
+    
+    <!-- this page's specific css-->
+    <link href="gg.css" rel=stylesheet type="text/css" >
+
+    <!--font-->
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Permanent+Marker|Quattrocento+Sans" rel="stylesheet">
+
+</head>
+
+<body>
+    <header id="grad1">
+        <a href="index.html" id="home">
+            <h1>Culture Cast Upon a Wall</h1>
+        </a>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbuttons">
+                <button class="btn navbar-btn" id="look"><a href="look.html">Lore Look</a></button>
+                <button class="btn navbar-btn" id="murals"><a href="mm.html">Murals</a></button>
+                <button class="btn navbar-btn" id="graffiti"><a href="gg.html">Graffiti</a></button>
+                <button class="btn navbar-btn" id="campus"><a href="campus.html">Campus</a></button>
+                <button class="btn navbar-btn" id="sources"><a href="cited.html">Sources</a></button>
+                <canvas id="c" onclick="off()"></canvas>
+                <button class="btn navbar-btn" #id="thing" onclick="on()">A Thing</button>
+                
+                <script>
+                    /* from W3Schools*/
+                    function on() {
+                        document.getElementById("c").style.display = "block";
+                    }
+
+                    function off() {
+                        document.getElementById("c").style.display = "none";
+                    }
+                    
+                    /*from Tim Holman on CodePen*/
+                    var width = window.innerWidth,
+                    height = window.innerHeight,
+                    c = document.getElementById('c'),
+                    ctx = c.getContext('2d');
+                    c.width = width;
+                    c.height = height;
+
+                    var paint = [];
+
+                    var totalPaints = width/50;
+                    var size = 20;
+
+                    function init(){
+                        for (var i = 0; i < totalPaints; i++){
+                            addPaint();
+                        }
+                        setInterval( update, 40 );
+                    }
+
+                    function drawPaint(x,y,size, colour) {
+                        ctx.beginPath();
+                        ctx.arc(x, y, size ,0 , Math.PI*2, true);
+                        ctx.closePath();
+                        ctx.fillStyle=colour;
+                        ctx.fill();
+                    }
+
+                    function update(){
+                        for (var i = 0; i < paint.length; i++){
+                            paint[i].y = paint[i].y + paint[i].v;
+                            if (paint[i].y > height + 60){
+                                paint.splice(i,1);
+                                addPaint();
+                            }
+                            drawPaint(paint[i].x, paint[i].y, paint[i].s, paint[i].c);
+                        }
+                    }
+
+                    function addPaint(){
+                        //Try 50 times
+                        var i = 50;
+                        while(i > 0){
+                            size = Math.random() * size + 10;
+                            x = Math.random() * width;
+
+                            found = false;
+
+                            //Dont Allow drips ontop of each other (Overtaking drops destroy the prettyness)
+                            for (var j = 0; j < paint.length; j++){
+                                if ((x + size > paint[j].x) && (x - size < paint[j].x + paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+
+                                if ((x - size < paint[j].x) && (x + size > paint[j].x - paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (found == false){
+                                paint.push({s:size,
+                                           x:x,
+                                           y:-60,
+                                           v:(Math.random() * 2) + 2,
+                                           c:'#' + (Math.random() * 0x313131 + 0xaaaaaa | 0).toString(16)});
+                                i--;
+                                return;
+                            }
+                        }
+                    }
+
+                    init();
+                </script>
+            </div>
+        </div>
+    </nav>
+
+    <div class="synopsis">
+        <p>
+            "The name… is the faith of graffiti." - CAY 161
+        </p>
+    </div>
+
+    <div class="container">
+        <div id="info">
+            <p>
+                “Graffiti lingers on our subway door as a memento of what may well have been, our first of karma, as if indeed all the lives ever lived are sounding now like the bugles of gathering armies along the unseen ridge.” – Norman Mailer | With this lingering quote in mind, play the following for aesthetic purposes (or just to hear some nice, classic hip-hop/rap).
+            </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/kg1CbvHQAB0" frameborder="0" allowfullscreen></iframe>
+            <p>
+                In <i>The Faith of Graffiti</i>, a 1970s photojournalistic collection shot by Mervyn Kurlansky and Jon Naar and written by Norman Mailer (yes, it’s the source of the above quote), Mailer emphasizes how graffiti “was a movement which never dreamed of painting over the blank and empty modern world, but the authority of the city reacted as if the city itself might be in greater peril from graffiti than from junk.” According to Jessie L. Whitehead in <i>Graffiti: The Use of the Familiar</i>, graffiti “has been used as a visual symbol of resistance, group identity, and individual identity in and out of art galleries and the corporate social world.” A writer in <i>Understanding Graffiti</i> pushes graffiti as a discourse for refusing to adhere to any normalized protocol through which the artist can release libidinal thoughts and issues. I cannot (and will not) verify that last standpoint, but all of these quotes seem to align with everything I ever thought about graffiti.
+            </p>
+            <figure>
+                <img src="trumpf.jpg" alt="'TRUMP' written over the mural 'Parade of Humanity' by Michael Brown" title="I'm just glad it was fixed. :)"/>
+                <figcaption>'TRUMP' written over the mural 'Parade of Humanity' by Michael Brown, as taken by the Daily Tar Heel</figcaption>
+            </figure>
+            <figure>
+                <img src="turtlesgraf.jpg" alt="graffiti alongside 'Sea Turtles' by Michael Brown" />
+                <figcaption>
+                    Graffiti alongside 'Sea Turtles' by Michael Brown
+                </figcaption>
+            </figure>
+            <p>
+                My research on murals seemed to always point to graffiti as taking away from and somewhat demonizing the environments in which they are painted, especially if they are plastered upon other works. Sure, there is the reasoning that any sort of vandalism, i.e. if it wasn’t governmentally and/or corporately authorized to be there, then it shouldn’t be there, is wrong and illegal (hence, it’s called vandalism rather than an addendum, addition, or unseen collaboration). But, just because the city-doused calligraphy of sorts is sketchy, both in style and actions of creation, that doesn’t mean that they aren’t art. 
+            </p>
+            <div class="quote">
+                <p>Styles of Graffiti, according to Jessie L. Whitehead:</p>
+                <hr />
+                <ul>
+                    <li>tags: one-color signatures and elements that represent the artist's identity; oldest form</li>
+                    <li>throw-up: evolved; bubble letters in a two-to-three letter name; two colors; quickest for large work; abbreviation of tag name</li>
+                    <li>pieces: masterpieces; elaborate; filled in completely and more defined; at least an outline color, fill color, background color, and highlight color</li>
+                    <li>top to bottom (TTB): whole height of a subway car</li>
+                    <li>end to ends (ETE): cover one end of a subway car to another but not the entire car</li>
+                    <li>whole cars: TTB+ETE including windows</li>
+                    <li>whole trains: most superior; covers the entire train</li>
+                    <li>“wild-style”: unreadable interlocking letters that signify direction and flow of movement; uses arrows and arrowheads; exaggeration and interconnecting letters</li>
+                    <li>3d: added effect on basic letter</li>
+                    <li>fading: blending colors</li>
+                    <li>computer style: subgenre of wild-style, appearing to be digital or bitmapped</li>
+                    <li>new modifications: twists on old styles</li>
+                </ul>
+            </div>
+            <p>
+                How many art pieces through time were adored much later than when they were made like they were aging like a fine wine? Vincent van Gogh only sold one work while he was alive, yet students, historians, and even the general viewer know and appreciate his influence. How many works have no face to its creator (as far as one is aware) yet are enjoyed by many? For example, how many people actually know what the dance music duo in Daft Punk or all of the members of Slipknot look like underneath their masks or even have the care to look? Or, for a more topical case, when a conceptual vision from Banksy pops up out of nowhere, they are usually only disapproved through the basis of the law – their works are usually vandalism in application – not its skill or aesthetic, yet most people if anyone at all have no idea what they look like.
+            </p>
+            <p>
+                Graffiti artists can come from societally dangerous backgrounds. Graffiti may usually be displayed in minority-heavy areas whereas they would be disgraced or shamed elsewhere. Yet, their styles are now commonly retrieved from those stereotypical lifestyles for those outside of those bubbles to flaunt as fashion and aesthetic, being a staple for most streetwear or “hype-beast gear”. (Note: this was probably truer last decade, but I still see a fair number of sketchy fonts on hats, shirts, and hoodies.) 
+            </p>
+            <p>
+                The folklore of the present is being altered by the traditions of the past, yet the pioneers of these traditions tend to be left behind to be forgotten because of how and/or why they may have been done. By taking away their meaning, aren’t we – the collective we, not necessarily the reader of my words or myself – gentrifying the culture, assimilating it more personal rather than symbiotic gain? Why do the raw artists always lose?
+            </p>
+            <p class="quote">
+                “Perhaps that is the unheard echo of graffiti, the vibration of that profound discomfort it arouses, as if the unheard music of its proclamation and/or its mess, the rapt intent seething of its foliage, is the herald of some oncoming apocalypse less and less far away.” – Norman Mailer
+            </p>
+            <p>
+                I’m sure Banksy’s anonymity gives more power to his creations judging society. But, when those before and after them choose to do the same, sometimes attempting to retake the world they knew that was taken from them by marking that territory with a tag, they get ridiculed. Is it due to it not being a mural or something worthy of being in a gallery? Who is to say what priceless versus what is rubbish? Beauty is in the eye of the beholder, and if the beholder is powerful and disapproves of it, probably due to lack of understanding, then it must go away. 
+            </p>
+            <figure>
+                <img src="iwwoh.jpg" alt="a mural by Banksy" />
+                <figcaption>
+                    "iwwoh" by Banksy, a blend of muralism and graffiti-like styles
+                </figcaption>
+            </figure>
+            <p>
+                It is usually the winners that have told history, but with an increase of “woke-ness” and red-pilling in society nowadays, the unsung heroes and those that fought their hardest but not enough to win are being recognized. Graffiti does the same, being, as Whitehead also calls it, an alternative to the orderly images more often produced by established artists and the support of the "official art community” as a springboard for the examination of personal identity, commercial design, social history, and community conflict. 
+            </p>
+            <p>
+                The “fighting back against the system mentality” – the systems of art and the systems of government – reminded me of a video game, an old one by today’s standards but was re-released not too long ago: <i>Marc Eckō's Getting Up: Contents Under Pressure</i>. (Do you remember that hip-hop, streetwear fashion last decade with the rhinos on everything? Yep, it’s the same Eckō.) In the game, the racially ambiguous – probably a blend of African-American and Hispanic culture to bring in players of both usually marginalized backgrounds if I had to guess – protagonist Trane tries to make his way up in the world through the fictional city of New Radius. His dream to be a graffiti artist, one obviously influenced by the local bigwigs of the spray paint scene (including those in real life by breaking the fourth wall), is constantly pushed back by enemy groups, a <i>1984</i>-like, authoritarian government and militia, and struggles between family and friends, and it is the goal of the player to get him there with one of the best soundtracks I’ve ever heard in gaming playing along the way. (There aren’t many females in the lineup – the music or the game as characters – but when they’re there, they make their mark, and that makes me happy.) 
+            </p>
+            <p>
+                If you want to watch a duo of Canadian best friends play through <i>Getting Up</i>, then this is for you.
+            </p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/08GTUF6wd0c" frameborder="0" allowfullscreen></iframe> 
+            <p>
+                Although the setting of <i>Getting Up</i> is technically fictional and considerably aged relative to recent media, the fact that New Radius is a near-immediate reflection of Philadelphia and New York City – not as much as Los Santos in <i>Grand Theft Auto V</i> is to Los Angeles, California, but it’s close enough to raise some eyebrows – may have been a signal or omen from Mr. Eckō. Though, in my opinion, you should take his message with a grain of salt. Seeing how his control over his own fashion line turned out, aka no longer in his control at all, it could be wishful thinking. Yet, if you see the success of <i>Complex</i> Media, then he might know what he’s talking about.
+            </p>
+            <p>
+                Jon Naar, one of the photographers himself in <i>The Faith of Graffiti</i>, way back in the 1970s, looks upon a sign of instruction soaked in an aura of fascism that said, “DON’T POLLUTE – KEEP THE CITY CLEAN”, and he combats it by commenting, “They don’t see that the sign is a form of pollution itself.” Taking down the art will not take down the artist. It will only make them stronger and more willing to fight. 
+            </p>
+        </div>
+    </div>
+    <footer>
+        <div id="projdetails">
+            <p>
+                Johna Dalton | Culture Cast Upon a Wall
+                <br >FOLK 476: Urban Folklore: Graffiti, Gods, and Gardens | Dr. Gabrielle Berlinger
+                <br ><a href="http://www.unc.edu/" target="_blank">The University of North Carolina at Chapel Hill</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

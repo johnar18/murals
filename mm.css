@@ -1,0 +1,11 @@
+.quote{
+    float: right;
+    background-color: darkorange;
+    color:white;
+}
+
+figure > img{
+    border: 15px solid darkorange;
+    border-radius: 25px;
+}
+

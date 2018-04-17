@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sources | Culture Cast Upon a Wall </title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Latest compiled and minified CSS from Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library, just in case -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript, just in case -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--our shared css-->
+    <link href="styles.css" rel=stylesheet type="text/css" >
+    
+    <!-- this page's specific css-->
+    <link href="cited.css" rel=stylesheet type="text/css" >
+
+    <!--font-->
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Permanent+Marker|Quattrocento+Sans" rel="stylesheet">
+
+</head>
+
+<body>
+    <header id="grad1">
+        <a href="index.html" id="home">
+            <h1>Culture Cast Upon a Wall</h1>
+        </a>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbuttons">
+                <button class="btn navbar-btn" id="look"><a href="look.html">Lore Look</a></button>
+                <button class="btn navbar-btn" id="murals"><a href="mm.html">Murals</a></button>
+                <button class="btn navbar-btn" id="graffiti"><a href="gg.html">Graffiti</a></button>
+                <button class="btn navbar-btn" id="campus"><a href="campus.html">Campus</a></button>
+                <button class="btn navbar-btn" id="sources"><a href="cited.html">Sources</a></button>
+                <canvas id="c" onclick="off()"></canvas>
+                <button class="btn navbar-btn" #id="thing" onclick="on()">A Thing</button>
+                
+                <script>
+                    /* from W3Schools*/
+                    function on() {
+                        document.getElementById("c").style.display = "block";
+                    }
+
+                    function off() {
+                        document.getElementById("c").style.display = "none";
+                    }
+                    
+                    /*from Tim Holman on CodePen*/
+                    var width = window.innerWidth,
+                    height = window.innerHeight,
+                    c = document.getElementById('c'),
+                    ctx = c.getContext('2d');
+                    c.width = width;
+                    c.height = height;
+
+                    var paint = [];
+
+                    var totalPaints = width/50;
+                    var size = 20;
+
+                    function init(){
+                        for (var i = 0; i < totalPaints; i++){
+                            addPaint();
+                        }
+                        setInterval( update, 40 );
+                    }
+
+                    function drawPaint(x,y,size, colour) {
+                        ctx.beginPath();
+                        ctx.arc(x, y, size ,0 , Math.PI*2, true);
+                        ctx.closePath();
+                        ctx.fillStyle=colour;
+                        ctx.fill();
+                    }
+
+                    function update(){
+                        for (var i = 0; i < paint.length; i++){
+                            paint[i].y = paint[i].y + paint[i].v;
+                            if (paint[i].y > height + 60){
+                                paint.splice(i,1);
+                                addPaint();
+                            }
+                            drawPaint(paint[i].x, paint[i].y, paint[i].s, paint[i].c);
+                        }
+                    }
+
+                    function addPaint(){
+                        //Try 50 times
+                        var i = 50;
+                        while(i > 0){
+                            size = Math.random() * size + 10;
+                            x = Math.random() * width;
+
+                            found = false;
+
+                            //Dont Allow drips ontop of each other (Overtaking drops destroy the prettyness)
+                            for (var j = 0; j < paint.length; j++){
+                                if ((x + size > paint[j].x) && (x - size < paint[j].x + paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+
+                                if ((x - size < paint[j].x) && (x + size > paint[j].x - paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (found == false){
+                                paint.push({s:size,
+                                           x:x,
+                                           y:-60,
+                                           v:(Math.random() * 2) + 2,
+                                           c:'#' + (Math.random() * 0x313131 + 0xaaaaaa | 0).toString(16)});
+                                i--;
+                                return;
+                            }
+                        }
+                    }
+
+                    init();
+                </script>
+            </div>
+        </div>
+    </nav>
+
+    <div class="synopsis">
+        <p>
+            "Public art (a) gives a sense of place, (b) engages the people who use the space, (c) provides a model of imaginative work, and (d) assists in urban regeneration." – Kristin Lee Moss
+    </div>
+
+    <div class="container">
+        <div id="info">
+            <h3 id="pah">"The Parade of Humanity" by Michael Brown</h3>
+            <div class="slideshow-container">
+
+                <div class="mySlides fade">
+                  <div class="numbertext">1 / 10</div>
+                  <img src="coffeeA.jpg" style="width:100%">
+                  <div class="text">Right-most</div>
+                </div>
+
+                <div class="mySlides fade">
+                  <div class="numbertext">2 / 10</div>
+                  <img src="coffeeB.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides fade">
+                  <div class="numbertext">3 / 10</div>
+                  <img src="coffeeC.jpg" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                  <div class="numbertext">4 / 10</div>
+                  <img src="coffeeD.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides fade">
+                  <div class="numbertext">5 / 10</div>
+                  <img src="coffeeE.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides fade">
+                  <div class="numbertext">6 / 10</div>
+                  <img src="coffeeF.jpg" style="width:100%">
+                </div>
+                
+                <div class="mySlides fade">
+                  <div class="numbertext">7 / 10</div>
+                  <img src="coffeeG.jpg" style="width:100%">
+                </div>
+                
+                <div class="mySlides fade">
+                  <div class="numbertext">8 / 10</div>
+                  <img src="coffeeH.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides fade">
+                  <div class="numbertext">9 / 10</div>
+                  <img src="coffeeI.jpg" style="width:100%">
+                </div>
+
+                <div class="mySlides fade">
+                  <div class="numbertext">10 / 10</div>
+                  <img src="coffeeJ.jpg" style="width:100%">
+                  <div class="text">Left-most</div>
+                </div>
+
+            </div>
+            <br>
+
+            <div style="text-align:center">
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span>
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span> 
+              <span class="dot"></span>
+            </div>
+
+            <script>
+            var slideIndex = 0;
+            showSlides();
+
+            function showSlides() {
+                var i;
+                var slides = document.getElementsByClassName("mySlides");
+                var dots = document.getElementsByClassName("dot");
+                for (i = 0; i < slides.length; i++) {
+                   slides[i].style.display = "none";  
+                }
+                slideIndex++;
+                if (slideIndex > slides.length) {slideIndex = 1}    
+                for (i = 0; i < dots.length; i++) {
+                    dots[i].className = dots[i].className.replace(" active", "");
+                }
+                slides[slideIndex-1].style.display = "block";  
+                dots[slideIndex-1].className += " active";
+                setTimeout(showSlides, 4000); // Change image every 4 seconds
+            }
+            </script>
+            
+            <h3>Literary Sources:</h3>
+            <p>
+                Chizhikova, Sophia. "Local Artist Is Restoring Two Well-known Chapel Hill Murals." The Daily Tar Heel. November 28, 2016. Accessed April 12, 2018. <a href=" http://www.dailytarheel.com/article/2016/11/local-artist-is-restoring-two-well-known-chapel-hill-murals">http://www.dailytarheel.com/article/2016/11/local-artist-is-restoring-two-well-known-chapel-hill-murals.</a>
+            </p>
+            <p>
+                Cooper, Martha, and Joseph Sciorra. R.I.P.: Memorial Wall Art. New York: Thames & Hudson, 2001.
+            </p>
+            <p>
+                Cordova, Cary. “Portable Murals: Children’s Book Press and the Circulation of Latino Art.” Visual Resources 33, no. 3-4, (2017) 332-62, DOI: 10.1080/01973762.2017.1277096 
+            </p>
+            <p>
+                Kirshenblatt-Gimblett, Barbara. “The Future of Folklore Studies in America: The Urban Frontier.” Folklore Forum 16, no. 2, (1983) 175-234. 
+            </p>
+            <p>
+                Kodish, Debora. “Cultivating Folk Arts and Social Change.” Journal of American Folklore 126, no. 502, (2013) 434-502, DOI: 10.1353/jaf.2013.0062 
+            </p>
+            <p>
+                Kurlansky, Mervyn, Norman Mailer, and Jon Naar. The Faith of Graffiti: Documented by Mervyn Kurlansky and Jon Naar. S.l.: S.n., 1974.
+            </p>
+            <p>
+                Little, Jane. "Trump Graffiti Defaces Chapel Hill Mural." The Daily Tar Heel. April 21, 2016. Accessed April 6, 2018. <a href="http://www.dailytarheel.com/article/2016/04/trump-graffiti-defaces-chapel-hill-mural">http://www.dailytarheel.com/article/2016/04/trump-graffiti-defaces-chapel-hill-mural</a>a>. 
+            </p>
+            <p>
+                Lovata, Troy, and Elizabeth Olton. Understanding Graffiti: Multidisciplinary Studies from Prehistory to the Present. Walnut Creek, CA: Left Coast Press, 2015.
+            </p>
+            <p>
+                Miller, Mattias. "Murals Bring Color to Chapel Hill." The Daily Tar Heel, September 21, 2017. Accessed March 2018. <a href="http://www.dailytarheel.com/article/2017/09/murals-bring-color-to-chapel-hill">http://www.dailytarheel.com/article/2017/09/murals-bring-color-to-chapel-hill</a>. 
+            </p>
+            <p>
+                Moss, Kristin L. “Cultural Representation in Philadelphia Murals: Images of Resistance and Sites of Identity Negotiation.” Western Journal of Community 74, no. 4, (2010) 372-95, DOI: 10.1080/10570314.2010.492819 
+            </p>
+            <p>
+                "Murals of Chapel Hill." Wikipedia. March 03, 2018. Accessed April 9, 2018. <a href="https://en.wikipedia.org/wiki/Murals_of_Chapel_Hill">https://en.wikipedia.org/wiki/Murals_of_Chapel_Hill</a>. 
+            </p>
+            <p>
+                O’Connell, Maureen H. “Painting Hope.” Commonweal 135, no. 1 (January 2008): 19-23.  
+            </p>
+            <p>
+                Town of Chapel Hill. Chapel Hill Downtown Walking Map. PDF. Chapel Hill, NC: Townofchapelhill.org, March 2018. <a href="http://www.townofchapelhill.org/home/showdocument?id=3645">http://www.townofchapelhill.org/home/showdocument?id=3645</a> 
+            </p>
+            <p>
+                UNC-Chapel Hill. Twitter Post. April 5, 2018, 12:44 PM. <a href="https://twitter.com/UNC/status/981980869459169280">https://twitter.com/UNC/status/981980869459169280</a>
+            </p>
+            <p>
+                Whitehead, Jessie L. “Graffiti: The Use of the Familiar.” Art Education 57, no. 6 (November 2004): 25-32. 
+            </p>
+            
+            <h3>Chosen Videos:</h3>
+            <p>
+                Masi308. “Talib Kweli – Subway Surfing”. Filmed [2006]. YouTube video, Duration. Posted [Mar 2009]. <a href="https://www.youtube.com/watch?v=kg1CbvHQAB0">https://www.youtube.com/watch?v=kg1CbvHQAB0</a>. 
+            </p>
+            <ul id="note">
+                <li>Note: “Subway Surfing” by Talib Kweli featuring Rakim. Produced by Marc Ecko</li>
+            </ul>
+            <p>
+               Super Best Friends Play. “Best Friends Play Marc Eckō's Getting Up - Contents Under Pressure (Part 01)”. Filmed [2017]. YouTube video, 31:02. Posted [August 2017]. <a href="https://www.youtube.com/watch?v=08GTUF6wd0c">https://www.youtube.com/watch?v=08GTUF6wd0c</a>.
+            </p>
+            <p>
+                The Art Assignment. “Art + Taxes = The Dirty Truth”. Filmed [2018]. YouTube video, 09:18. Posted [Apritl 2018]. <a href="https://www.youtube.com/watch?v=QZz2PhTQJCA">https://www.youtube.com/watch?v=QZz2PhTQJCA</a>. 
+            </p>
+        </div>
+    </div>
+    <footer>
+        <div id="projdetails">
+            <p>
+                Johna Dalton | Culture Cast Upon a Wall
+                <br >FOLK 476: Urban Folklore: Graffiti, Gods, and Gardens | Dr. Gabrielle Berlinger
+                <br ><a href="http://www.unc.edu/" target="_blank">The University of North Carolina at Chapel Hill</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

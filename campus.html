@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Culture | Culture Cast Upon a Wall </title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Latest compiled and minified CSS from Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library, just in case -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript, just in case -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--our shared css-->
+    <link href="styles.css" rel=stylesheet type="text/css" >
+    
+    <!-- this page's specific css-->
+    <link href="campus.css" rel=stylesheet type="text/css" >
+
+    <!--font-->
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Permanent+Marker|Quattrocento+Sans" rel="stylesheet">
+
+</head>
+
+<body>
+    <header id="grad1">
+        <a href="index.html" id="home">
+            <h1>Culture Cast Upon a Wall</h1>
+        </a>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbuttons">
+                <button class="btn navbar-btn" id="look"><a href="look.html">Lore Look</a></button>
+                <button class="btn navbar-btn" id="murals"><a href="mm.html">Murals</a></button>
+                <button class="btn navbar-btn" id="graffiti"><a href="gg.html">Graffiti</a></button>
+                <button class="btn navbar-btn" id="campus"><a href="campus.html">Campus</a></button>
+                <button class="btn navbar-btn" id="sources"><a href="cited.html">Sources</a></button>
+                <canvas id="c" onclick="off()"></canvas>
+                <button class="btn navbar-btn" #id="thing" onclick="on()">A Thing</button>
+                
+                <script>
+                    /* from W3Schools*/
+                    function on() {
+                        document.getElementById("c").style.display = "block";
+                    }
+
+                    function off() {
+                        document.getElementById("c").style.display = "none";
+                    }
+                    
+                    /*from Tim Holman on CodePen*/
+                    var width = window.innerWidth,
+                    height = window.innerHeight,
+                    c = document.getElementById('c'),
+                    ctx = c.getContext('2d');
+                    c.width = width;
+                    c.height = height;
+
+                    var paint = [];
+
+                    var totalPaints = width/50;
+                    var size = 20;
+
+                    function init(){
+                        for (var i = 0; i < totalPaints; i++){
+                            addPaint();
+                        }
+                        setInterval( update, 40 );
+                    }
+
+                    function drawPaint(x,y,size, colour) {
+                        ctx.beginPath();
+                        ctx.arc(x, y, size ,0 , Math.PI*2, true);
+                        ctx.closePath();
+                        ctx.fillStyle=colour;
+                        ctx.fill();
+                    }
+
+                    function update(){
+                        for (var i = 0; i < paint.length; i++){
+                            paint[i].y = paint[i].y + paint[i].v;
+                            if (paint[i].y > height + 60){
+                                paint.splice(i,1);
+                                addPaint();
+                            }
+                            drawPaint(paint[i].x, paint[i].y, paint[i].s, paint[i].c);
+                        }
+                    }
+
+                    function addPaint(){
+                        //Try 50 times
+                        var i = 50;
+                        while(i > 0){
+                            size = Math.random() * size + 10;
+                            x = Math.random() * width;
+
+                            found = false;
+
+                            //Dont Allow drips ontop of each other (Overtaking drops destroy the prettyness)
+                            for (var j = 0; j < paint.length; j++){
+                                if ((x + size > paint[j].x) && (x - size < paint[j].x + paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+
+                                if ((x - size < paint[j].x) && (x + size > paint[j].x - paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (found == false){
+                                paint.push({s:size,
+                                           x:x,
+                                           y:-60,
+                                           v:(Math.random() * 2) + 2,
+                                           c:'#' + (Math.random() * 0x313131 + 0xaaaaaa | 0).toString(16)});
+                                i--;
+                                return;
+                            }
+                        }
+                    }
+
+                    init();
+                </script>
+            </div>
+        </div>
+    </nav>
+
+    <div class="synopsis">
+        <p>
+            "The display of identity in a public, aesthetic way creates a place for that group's discourse in the web of social relations." - Sonja Foss
+        </p>
+    </div>
+
+    <div class="container">
+        <div id="info">
+            <p>
+               Not many cities in the United States can hold the claims that Chapel Hill has. Aside from being the home of one of the best universities – the first of its kind, literally – the history built upon its lengthy age cannot be compared. Not all of the tales are happy, and those that aren’t do still leave their mark today, but the amount of goodness that the area contains overshadows those cons greatly, at least in principle. Yet, wouldn’t that mean that the place – its physicality based on its inhabitants and the abstract concept of the place – would be better if those troublesome pieces of the puzzle were taken away? I don’t believe that can necessarily apply, at least not in this little town. 
+            </p>
+            <figure>
+                <img src="pbnrestore.jpg" alt="'Paint By Numbers' by Michael Brown" />
+                <figcaption>
+                    'Paint By Numbers' by Michael Brown, taken by the Daily Tar Heel
+                </figcaption>
+            </figure>
+            <figure>
+                <img src="turtles.jpg" alt="'Sea Turtles' by Michael Brown" />
+                <figcaption>
+                    'Sea Turtles' by Michael Brown
+                </figcaption>
+            </figure>
+            <p>
+                By taking away all that may make someone cringe or uncomfortable, as sadistic or immoral as it could be considered, it will take away from what makes that place what it is. One could argue that the physical exile or deletion of something doesn’t erase the historical, intangible footprint, and I agree to a certain degree if that thing directly attempted to belittle someone, i.e. superiority (as opposed to the celebration and/or appreciation of worth) of someone was the purpose of its creation. However, without that thing’s presence, there is less of a reason to not only continue a fight but also keep its purpose afloat once that fight is technically won. 
+            </p>
+            <p>
+                “Memory is triggered by contact with the objects and places associated with past events,” as Cooper and Sciorra say in <i>R.I.P. Memorial Wall Art</i>, and while not every area of Chapel Hill shines in a complacent, complicit, Carolina blue, it is still perfectly, unforgettably representative of Carolina – the school and the state – and I love it just as it is which leads to why I’m doing this.
+            </p>
+            <p>
+                Upon hearing of this research project, the first idea that came to mind was murals. Obviously, that wonder of mine stayed with me in completing these pages, though it may seem that graffiti captured more of my interest. With the spreads of tags and markings that have bordered my ways to and from home, I am more adjusted to the livelihoods around graffiti, but I presume that my daily practices in art via doodles and the like have influenced my draw toward murals. To create a piece, whether paid or otherwise, requires so much time, effort, and character. The latter is most important in making a piece and the place where it’s contained more authentic and unique, making them their own concepts and ideals. However, with a mural, the realness of the work is maximized and stretched, not just expressing itself visually and symbolically but literally projecting to the rest of the world like a paused movie, and with a mural along basically every corner of Chapel Hill proper, how could I not fall in love on the spot?
+            </p>
+            <p>
+                In hindsight, it may be a superficial reason, but the artistic feel of Chapel Hill was a great influence on me coming to UNC versus any other school in the area (or anywhere else, really). Not every piece was new or pristine, but they didn’t have to be. The vintage feeling of it all brought a sense of comfort like what I would get at my home-home. Every time I go past those beautiful sea turtles up the hill, I always feel like I’m coming back to my second home, and it’ll be sad when I go down the slope past them on the quickly approaching day I no longer need to be here. 
+            </p>
+            <p class="quote">
+                "Extensive community involvement is key; one appeal of murals for community members involves access to controlling images and representations. [Jane] Golden said that while it may be “risky” to offer control of mural content to community residents (as they might not choose the best artistic design), she feels inclusiveness is the only way to create murals with positive impact and long-lasting appeal." – Kristin Lee Moss
+            </p>
+            <p>
+                In order to take in as many murals as I could, I took part in a sort of a walking tour of Chapel Hill suggested by <a href="http://www.townofchapelhill.org/home/showdocument?id=3645">Ackland Art Museum</a>. On the site, twenty different murals all over the town are suggested to visit from my favorite “Sea Turtles” to a beautiful conglomeration of society right on the edge of UNC’s campus to start it off. Unfortunately, being outside and I don’t mix very well, especially in this season where my allergies flare like mad, so the full tour wasn’t traversed, and each of my multiple excursions outside wasn’t as long as I would have wished. I was able to observe many a mural in my shaky times out, along with some new and/or temporary pieces made by some local artists (see below), but I do hope to be able to give each and every mural the time it deserves soon enough. 
+            </p>
+            <p>
+               Out of all of my outings, two specific times make the greatest indents in my mind: the first and the last. The first was visually pleasing, but once I was out there, a harsher reality reached me. Cold and solidary – usual pleasures for me – made my attempts at observations a little lackluster. Not many were out, and those that were didn’t seem happy to be there. The collective feeling of displeasure reminded me of the aura that emanates after a lost sports game except with less glass broken and drinks ingested. However, unlike people, the paintings were always loud and proud, even those tarnished by time or outrageous actions. In my most current day trip – the same one with the Ackland semi-tour – the day was beautiful, its people were lively, and the pictures were a place of quiet. With the range of subcultures located here, the atmospheres differ greatly around each one. I won’t lie; if my path diverted farther from Franklin Street, then my fears increased. As much as I’d like to believe it was simply due to the unfamiliarity of the area, I can’t help but think some stereotyping flared in my system. Despite that, they didn’t take away from the sense of place and togetherness with every mural. 
+            </p>
+            <p>
+                People from various backgrounds walked along the street, probably thrown off by my face mask in the pollen-polluted air but seemingly nice all the while, donning mostly Carolina blue and taking part in just many conversations. Yet, at the murals, it was mostly lonely and quiet. I’m not sure if it was due to me staring at them by myself like a weirdo, but it could’ve been. However, I wasn’t alone; people just stayed in their circles without me approaching them or them coming to me. The number of friends sat, drinking, and/or smoking (cigarettes and vapes) on the walls weren’t countable, but the fact that buddies were indeed bustling in comparison to the void of the past shows how friendly Chapel Hill truly is. The interactions of the town itself mirrored those I have with myself and my familiars: sometimes rowdy and sometimes enclosed. Like me, the town does breathe, and the art everywhere – shout out to UNC’s campaign – might as well be oxygen in the blood.
+            </p>
+            <div id="tweet">
+                <blockquote class="twitter-tweet tw-align-center" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">Celebrate the House Undergraduate Library&#39;s 50th anniversary and participate in local artist Mary Carter Taub&#39;s creative installation, &quot;Right Angles&quot; ⤵️ <a href="https://twitter.com/hashtag/ArtsEverywhereUNC?src=hash&amp;ref_src=twsrc%5Etfw">#ArtsEverywhereUNC</a> <a href="https://t.co/2Q48f8YSW9">pic.twitter.com/2Q48f8YSW9</a></p>&mdash; UNC-Chapel Hill (@UNC) <a href="https://twitter.com/UNC/status/981980869459169280?ref_src=twsrc%5Etfw">April 5, 2018</a></blockquote>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            </div>
+            <p>
+                The above Tweet references local artist Mary Carter Taub and her art piece on the UL, a temporary piece of wall art that both brightens the usually tame atmosphere of library study and playfully traps the students wandering inside like a whimsical jail. I’ve seen art pieces in the Smithsonian that break norms similarly to it, such as President Bill Clinton’s official portrait looking like it was run through a kaleidoscope, yet tape on a library seems more out of place. While the piece is lovely in its own right, and it and its maker should be celebrated while it’s still here, I wouldn’t have known Ms. Taub had made it without looking it up for myself. However, I can’t say the same about another artist, and I can’t thank him enough for opening up his schedule for an interview. 
+            </p>
+            <p>
+               Long story short, if you go down Franklin Street or anywhere, really, in Chapel Hill and pick a mural, then I swear there’s a seventy-five percent chance it was made by Mr. Michael Brown. No, seriously, look at what <a href="https://en.wikipedia.org/wiki/Murals_of_Chapel_Hill#List_of_murals_by_artist_and_date">Wikipedia (yes, you can trust it)</a> says. A perfect example of a Chapel Hill citizen, a UNC alumnus, and one of the most real persons with whom I’ve conversed, he’s made a mark on this town comparable to (and probably more than, to be honest) any great here that has anything to do with basketball. Sports seasons come and go, but the art may as well be forever. As long as they’re restored – no, as long as they are created in the first place – they are here to stay. 
+            </p>
+            <p class="quote">
+                “Some people come to me with a very specific idea for a mural, others just show me a blank wall. Either way, my job as a mural artist is to walk with them through the creative process and the budget realities to get them what they want at an affordable price. This never changes whether they are an architectural art client, an interior designer, a public art client or a homeowner.” - Michael Brown
+            </p>
+            <p>
+                Whenever one thinks of an artist, if I had to guess, then they would probably think of artists from the mid-Twentieth Century and before first, and they would most likely be male. However, if one was to envision an artist of today, then they would probably be female and/or feminine. Do you see this disparity? Men obviously can have the talent to produce fabulous works, but with the overhanging stigma of men having to be masculine, whatever that means, and art being a feminine hobby or career, they are being pushed away. Despite that, and I’m sure the belief was more hard set when Mr. Brown was my age, walking the same walk down UNC’s hallways as I walk, he has thrived in his field on levels I cannot begin to describe. Have a listen to the (salvageable parts of the) entire interview: (Can you hear my excitement? Be sure to take note of the last few minutes. ;D)
+            </p>
+            <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/430971006%3Fsecret_token%3Ds-ymF2m&color=%23228b22&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+            <p>
+                Be sure to indulge in Mr. Brown’s works out in the open and privately whenever you want through his website <a href="https://muralsbymichaelbrown.com/">here</a>! (If you come across this, sir, then thank you so much once again for your time!)
+            </p>
+        </div>
+    </div>
+    <footer>
+        <div id="projdetails">
+            <p>
+                Johna Dalton | Culture Cast Upon a Wall
+                <br >FOLK 476: Urban Folklore: Graffiti, Gods, and Gardens | Dr. Gabrielle Berlinger
+                <br ><a href="http://www.unc.edu/" target="_blank">The University of North Carolina at Chapel Hill</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

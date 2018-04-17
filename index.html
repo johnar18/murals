@@ -1,2 +1,215 @@
-<h1>this is a test</h1>
-<p>Yo, what's good?</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Culture Cast Upon a Wall </title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Latest compiled and minified CSS from Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library, just in case -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript, just in case -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!--our shared css-->
+    <link href="styles.css" rel=stylesheet type="text/css" >
+    
+    <!-- this page's specific css-->
+    <link href="index.css" rel=stylesheet type="text/css" >
+
+    <!--font-->
+    <link href="https://fonts.googleapis.com/css?family=Homemade+Apple|Permanent+Marker|Quattrocento+Sans" rel="stylesheet">
+
+</head>
+
+<body>
+    <header id="grad1">
+        <a href="index.html" id="home">
+            <h1>Culture Cast Upon a Wall</h1>
+        </a>
+    </header>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbuttons">
+                <button class="btn navbar-btn" id="look"><a href="look.html">Lore Look</a></button>
+                <button class="btn navbar-btn" id="murals"><a href="mm.html">Murals</a></button>
+                <button class="btn navbar-btn" id="graffiti"><a href="gg.html">Graffiti</a></button>
+                <button class="btn navbar-btn" id="campus"><a href="campus.html">Campus</a></button>
+                <button class="btn navbar-btn" id="sources"><a href="cited.html">Sources</a></button>
+                <canvas id="c" onclick="off()"></canvas>
+                <button class="btn navbar-btn" #id="thing" onclick="on()">A Thing</button>
+                
+                <script>
+                    /* from W3Schools*/
+                    function on() {
+                        document.getElementById("c").style.display = "block";
+                    }
+
+                    function off() {
+                        document.getElementById("c").style.display = "none";
+                    }
+                    
+                    /*from Tim Holman on CodePen*/
+                    var width = window.innerWidth,
+                    height = window.innerHeight,
+                    c = document.getElementById('c'),
+                    ctx = c.getContext('2d');
+                    c.width = width;
+                    c.height = height;
+
+                    var paint = [];
+
+                    var totalPaints = width/50;
+                    var size = 20;
+
+                    function init(){
+                        for (var i = 0; i < totalPaints; i++){
+                            addPaint();
+                        }
+                        setInterval( update, 40 );
+                    }
+
+                    function drawPaint(x,y,size, colour) {
+                        ctx.beginPath();
+                        ctx.arc(x, y, size ,0 , Math.PI*2, true);
+                        ctx.closePath();
+                        ctx.fillStyle=colour;
+                        ctx.fill();
+                    }
+
+                    function update(){
+                        for (var i = 0; i < paint.length; i++){
+                            paint[i].y = paint[i].y + paint[i].v;
+                            if (paint[i].y > height + 60){
+                                paint.splice(i,1);
+                                addPaint();
+                            }
+                            drawPaint(paint[i].x, paint[i].y, paint[i].s, paint[i].c);
+                        }
+                    }
+
+                    function addPaint(){
+                        //Try 50 times
+                        var i = 50;
+                        while(i > 0){
+                            size = Math.random() * size + 10;
+                            x = Math.random() * width;
+
+                            found = false;
+
+                            //Dont Allow drips ontop of each other (Overtaking drops destroy the prettyness)
+                            for (var j = 0; j < paint.length; j++){
+                                if ((x + size > paint[j].x) && (x - size < paint[j].x + paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+
+                                if ((x - size < paint[j].x) && (x + size > paint[j].x - paint[j].s)){
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (found == false){
+                                paint.push({s:size,
+                                           x:x,
+                                           y:-60,
+                                           v:(Math.random() * 2) + 2,
+                                           c:'#' + (Math.random() * 0x313131 + 0xaaaaaa | 0).toString(16)});
+                                i--;
+                                return;
+                            }
+                        }
+                    }
+
+                    init();
+                </script>
+            </div>
+        </div>
+    </nav>
+
+    <div class="synopsis">
+            You can hear a song. You can see a dance. But, through murals and graffiti, you can look into a glimpse of the past, present, and future all at the same time, putting yourself right then and there and absorb the experience that one - the artist - wants to show you.
+    </div>
+
+    <div class="container">
+        <div id="info">
+            <p>
+               In history classes and literary academia, we learn of various civilizations throughout the eras in which humans have survived and thrived. Folklore and its studiers hark into the sets of knowledge gained in the past of those that lived before them and extrapolate and intertwine it in order to better understand the new histories being made in the present. Despite every known and unknown style of history-tracking having its own antiquities to discover and celebrate, folklore has had a stigma of being old-fashioned, primarily if not solely focused on the ancient times whereas the others aren’t afraid to see the influences of the old on the new. But, that is not the case for urban folklore. 
+            </p>
+            <p>
+                While the concept of cities has been around basically as long as civilizations have existed – after all, they may be the same thing – cities have only been in their current perspective since the industrial revolution of the 19th century. As work became more mechanical, life did the same, and for those not in the glamorous limelight, their perceivably grimy livings can be made beautiful through the togetherness of their blood families, the families built via friendship in their neighborhoods, and how they all make those neighborhoods their own.
+            </p>
+            <p>
+                Urban folklore has been described as "artistic communication in small groups." This definition can be spread as far as including any and every aspect of the metropolitan experience, ranging from the festivals and parades held on the streets to the foods divvied up for locals and tourists alike. The ways one performs or observes a task differ from one person and/or culture to another, and each development and tiny nuance separate the mainstream from the independent, the classy from the supposedly crude, and one community from another. However, many if not all sides of the societal spectrum can come together in forms where they are symbolically embodied, too, rather than acting in reality. 
+            </p>
+            <p class="quote">
+                Urban folklore: “artistic communication in small groups.”
+            </p>
+            <p>
+                Shrinking the broad “artistic communication” down to its denotation, the urban scene can be best painted through the images literally painted on its walls. Due to the various forms of large-scale disenfranchisement that can be sent toward a subcommunity – language-bound, racially/ethnically, or location-wise – along with the inter-/intrapersonal issues that may arise from day-to-day, the need to externally let out one’s anger, sadness, and general disappointments becomes a possibility. While, for some, it may lead to people painting the town red with blood from violence, another way of catharsis, sometimes influenced by the former ideal, may involve spreading a spectrum of color for all to take in.
+            </p>
+            <p>
+                With murals and graffiti drizzled and sprayed along the walls of the world, an urban artist – the classical and those considered corrupt – can tell their own stories and the ones of people, places, and ideas they care about. Whether it is for clout and competition or to embrace a core culture, the arts give new life to wherever they are housed, and what could be worthier of adoration – more characteristic of a place – than an expansive work or a hidden treasure that probably won’t last the tests of time but are always a joy to come back to and find?
+            </p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-12" id="afl">
+                <div class = "words">
+                    <a href="look.html"><h3>A Folklorist's Look</h3></a>
+                    <p>
+                        Wall art has been studied by folklorists and their peers for what feels like forever. Going from prehistoric cave paintings to a day-to-day commission in a town, the variety and history of murals, graffiti, their equivalents, and the stories they tell spans as far as the eye can see.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12" id ="mm">
+                <div class="words">
+                    <a href="mm.html"><h3>Murals and Mastery</h3></a>
+                    <p>
+                        How much imagery can someone fit on a wall? How much talent can one express to the world? Muralists test their limits along with the bounds of time, nature, and sometimes ethics to not only tell but show a story they feel needs to be shared.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12" id="gg">
+                <div class="words">
+                    <a href="gg.html"><h3>Greats and Graffiti</h3></a>
+                    <p>
+                        Whereas murals are generally celebrated, graffiti has had a tendency for being hated. Despite having a similar origin story, the process of tagging a name and setting a claim to territory, whether for control or just to show off, is much more difficult than it may appear.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12" id="cc">
+                <div class="words">
+                    <a href="campus.html"><h3>Campus Culture</h3></a>
+                    <p>
+                        Every school and its surroundings have their own past histories and new stories appended to them everyday, and UNC and Chapel Hill are no different. However, not many other schools can claim to have as much of an artistic culture, emphasize greatly by one of its own.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12" id="cs">
+                <div class="words">
+                    <a href="cited.html"><h3>Cited Sources</h3></a>
+                    <p>
+                        I am no genius, and I don't claim to be. Many of my ideas wouldn't have been as coherent, let alone existent, without outside input. Find the documents, analyses, and highlighted photos that caught my eyes as the focuses of my research here.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div id="projdetails">
+            <p>
+                Johna Dalton | Culture Cast Upon a Wall
+                <br >FOLK 476: Urban Folklore: Graffiti, Gods, and Gardens | Dr. Gabrielle Berlinger
+                <br ><a href="http://www.unc.edu/" target="_blank">The University of North Carolina at Chapel Hill</a>
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>
