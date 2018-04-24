@@ -38,6 +38,10 @@ nav {
 header>a {
     color:darkred;
 }
+a:hover{
+    color:#767676;
+    text-decoration: none;
+}
 
 a > #look, #afl>div>a>h3 {color:red;}
 
@@ -130,10 +134,7 @@ figure > figcaption {
     text-align: center;
 }
 
-a:hover{
-    color:#767676;
-    text-decoration: none;
-}
+
 
 a:active{
     color:darkorchid;
