@@ -39,15 +39,15 @@ header>a {
     color:darkred;
 }
 
-#look >a, #afl>div>a>h3 {color:red;}
+a > #look, #afl>div>a>h3 {color:red;}
 
-#murals >a, #mm>div>a>h3 {color:darkorange;}
+a > #murals, #mm>div>a>h3 {color:darkorange;}
 
-#graffiti > a, #gg>div>a>h3{color:goldenrod;}
+a > #graffiti, #gg>div>a>h3{color:goldenrod;}
 
-#campus > a, #cc>div>a>h3{color:forestgreen;}
+a > #campus, #cc>div>a>h3{color:forestgreen;}
 
-#sources > a, #cs>div>a>h3 {color:dodgerblue;}
+a >#sources, #cs>div>a>h3 {color:dodgerblue;}
 
 .synopsis{
     background-size: 100% auto;
